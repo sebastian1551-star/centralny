@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ładnex - Karty Charakterystyki</title>
+    <title>Magazyn Centralny - Karty Charakterystyki</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     
     <style>
@@ -98,7 +98,6 @@
             gap: 10px;
         }
 
-        /* Klikalny kafelek jako div (akcja sterowana przez JS) */
         .card-button-item {
             background-color: var(--card-bg);
             border: 2px solid #e2e8f0;
@@ -191,9 +190,8 @@
             margin-left: 8px;
         }
 
-        /* --- NOWA SEKCJA: INTEGRACJA POGLĄDU LIVE PDF --- */
         .preview-overlay {
-            display: none; /* Domyślnie ukryte */
+            display: none;
             position: fixed;
             top: 0;
             left: 0;
@@ -209,14 +207,13 @@
         .preview-box {
             background-color: white;
             width: 100%;
-            height: calc(100% - 70px); /* Zostawia miejsce na przyciski na dole */
+            height: calc(100% - 70px);
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 10px 25px rgba(0,0,0,0.3);
             position: relative;
         }
 
-        /* Bezpieczna ramka do przewijania PDF na telefonach */
         .preview-iframe {
             width: 100%;
             height: 100%;
@@ -252,7 +249,6 @@
             color: white;
         }
 
-        /* Dolny pasek ratunkowy */
         .emergency-bar {
             position: fixed;
             bottom: 0;
@@ -290,8 +286,8 @@
 <body>
 
     <header>
-        <div class="company-title">ŁADNEX</div>
-        <div class="company-sub">Zakład Samochodowy</div>
+        <div class="company-title">MAGAZYN CENTRALNY</div>
+        <div class="company-sub">Karty Charakterystyki</div>
         <div class="update-box">
             Ostatnie odświeżenie bazy: <span id="sync-date">...</span>
         </div>
@@ -304,6 +300,7 @@
 
     <div class="cards-list" id="cardsGrid">
         
+        <!-- Pozycja 1 -->
         <div class="card-button-item" onclick="showPdfPreview('Benzyna bezołowiowa 95, 98, EuroSuper 95, Super Plus 98', 'https://raw.githubusercontent.com/sebastian1551-star/kartymechanik/main/Benzyny%20handlowe%20PL.pdf')">
             <div class="pdf-icon-box">
                 <div class="num">1</div>
@@ -320,6 +317,7 @@
             <div class="chevron">➔</div>
         </div>
 
+        <!-- Pozycja 2 -->
         <div class="card-button-item" onclick="showPdfPreview('Olej Silnikowy Platinum Classic 5W-40', 'https://raw.githubusercontent.com/sebastian1551-star/kartymechanik/main/Olej_Silnikowy.pdf')">
             <div class="pdf-icon-box">
                 <div class="num">2</div>
@@ -385,29 +383,26 @@
             noDataText.style.display = found ? "none" : "block";
         });
 
-        // 3. FUNKCJE OBSŁUGI POGLĄDU PDF W LOCIE
+        // 3. Funkcje obsługi podglądu PDF w locie
         const overlay = document.getElementById('previewOverlay');
         const iframe = document.getElementById('previewIframe');
         const modalDlBtn = document.getElementById('modalDownloadBtn');
 
         function showPdfPreview(title, pdfUrl) {
-            // Konstruowanie bezpiecznego linku podglądu dla Google Docs Viewer
             const googleViewerUrl = "https://docs.google.com/gview?embedded=true&url=" + encodeURIComponent(pdfUrl);
             
-            // Wstrzyknięcie linków do struktury okienka
             iframe.src = googleViewerUrl;
             modalDlBtn.href = pdfUrl;
             modalDlBtn.download = title + ".pdf";
             
-            // Wyświetlenie okna
             overlay.style.display = "flex";
-            document.body.style.overflow = "hidden"; // Blokuje przewijanie tła aplikacji
+            document.body.style.overflow = "hidden";
         }
 
         function closePdfPreview() {
             overlay.style.display = "none";
-            iframe.src = ""; // Czyszczenie pamięci ramki
-            document.body.style.overflow = "auto"; // Przywraca przewijanie bazy
+            iframe.src = "";
+            document.body.style.overflow = "auto";
         }
 
         // 4. Pobieranie plików z GitHuba i pakowanie do ZIP
@@ -417,8 +412,11 @@
                 return;
             }
             const zip = new JSZip();
+            
+            // Poprawiona tablica - teraz zawiera oba pliki z bazy danych
             const files = [
-                { name: "1_Benzyny_handlowe_PL.pdf", url: "https://raw.githubusercontent.com/sebastian1551-star/kartymechanik/main/Benzyny%20handlowe%20PL.pdf" }
+                { name: "1_Benzyny_handlowe_PL.pdf", url: "https://raw.githubusercontent.com/sebastian1551-star/kartymechanik/main/Benzyny%20handlowe%20PL.pdf" },
+                { name: "2_Olej_Silnikowy.pdf", url: "https://raw.githubusercontent.com/sebastian1551-star/kartymechanik/main/Olej_Silnikowy.pdf" }
             ];
 
             alert("Pobieram pliki do wspólnej paczki ZIP, proszę czekać...");
@@ -433,7 +431,7 @@
                 const content = await zip.generateAsync({ type: "blob" });
                 const dl = document.createElement("a");
                 dl.href = URL.createObjectURL(content);
-                dl.download = "Karty_Charakterystyki_Ladnex.zip";
+                dl.download = "Karty_Charakterystyki_Magazyn_Centralny.zip";
                 document.body.appendChild(dl);
                 dl.click();
                 document.body.removeChild(dl);
