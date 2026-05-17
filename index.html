@@ -300,8 +300,7 @@
 
     <div class="cards-list" id="cardsGrid">
         
-        <!-- Pozycja 1 -->
-        <div class="card-button-item" onclick="showPdfPreview('Benzyna bezołowiowa 95, 98, EuroSuper 95, Super Plus 98', 'https://raw.githubusercontent.com/sebastian1551-star/kartymechanik/main/Benzyny%20handlowe%20PL.pdf')">
+        <div class="card-button-item" onclick="showPdfPreview('Benzyna bezołowiowa 95, 98, EuroSuper 95, Super Plus 98', 'https://raw.githubusercontent.com/sebastian1551-star/centralny/main/Benzyny%20handlowe%20PL.pdf')">
             <div class="pdf-icon-box">
                 <div class="num">1</div>
                 <div class="label">POGLĄD</div>
@@ -312,22 +311,6 @@
                 <div class="ufi-badge-zone">
                     <div class="ufi-line"><span class="ufi-title">UFI:</span> 1V30-Q0VS-G00H-KEX6</div>
                     <div class="ufi-line"><span class="ufi-title">UFI:</span> YY30-70K5-T000-8SH8</div>
-                </div>
-            </div>
-            <div class="chevron">➔</div>
-        </div>
-
-        <!-- Pozycja 2 -->
-        <div class="card-button-item" onclick="showPdfPreview('Olej Silnikowy Platinum Classic 5W-40', 'https://raw.githubusercontent.com/sebastian1551-star/kartymechanik/main/Olej_Silnikowy.pdf')">
-            <div class="pdf-icon-box">
-                <div class="num">2</div>
-                <div class="label">POGLĄD</div>
-            </div>
-            <div class="card-body">
-                <div class="card-vendor">Orlen</div>
-                <div class="card-name">Olej Silnikowy Platinum Classic 5W-40</div>
-                <div class="ufi-badge-zone">
-                    <div class="ufi-line"><span class="ufi-title">UFI:</span> Brak / Do uzupełnienia</div>
                 </div>
             </div>
             <div class="chevron">➔</div>
@@ -405,7 +388,7 @@
             document.body.style.overflow = "auto";
         }
 
-        // 4. Pobieranie plików z GitHuba i pakowanie do ZIP
+        // 4. Pobieranie plików z GitHuba i pakowanie do ZIP (Poprawiona nazwa repozytorium)
         async function downloadAllZip() {
             if (typeof JSZip === "undefined") {
                 alert("Trwa ładowanie modułu ZIP. Spróbuj ponownie za chwilę.");
@@ -413,10 +396,8 @@
             }
             const zip = new JSZip();
             
-            // Poprawiona tablica - teraz zawiera oba pliki z bazy danych
             const files = [
-                { name: "1_Benzyny_handlowe_PL.pdf", url: "https://raw.githubusercontent.com/sebastian1551-star/kartymechanik/main/Benzyny%20handlowe%20PL.pdf" },
-                { name: "2_Olej_Silnikowy.pdf", url: "https://raw.githubusercontent.com/sebastian1551-star/kartymechanik/main/Olej_Silnikowy.pdf" }
+                { name: "1_Benzyny_handlowe_PL.pdf", url: "https://raw.githubusercontent.com/sebastian1551-star/centralny/main/Benzyny%20handlowe%20PL.pdf" }
             ];
 
             alert("Pobieram pliki do wspólnej paczki ZIP, proszę czekać...");
