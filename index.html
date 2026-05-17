@@ -16,6 +16,9 @@
             --border-color: #cbd5e1;
             --text-main: #1e293b;
             --text-muted: #64748b;
+            --storage-bg: #fffbeb;
+            --storage-border: #fef08a;
+            --storage-text: #713f12;
         }
 
         * {
@@ -95,7 +98,7 @@
         .cards-list {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
         }
 
         .card-button-item {
@@ -104,7 +107,7 @@
             border-radius: 12px;
             padding: 16px;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             box-shadow: 0 2px 4px rgba(0,0,0,0.02);
             cursor: pointer;
             -webkit-tap-highlight-color: transparent;
@@ -127,6 +130,7 @@
             border-radius: 10px;
             margin-right: 14px;
             flex-shrink: 0;
+            margin-top: 4px;
         }
 
         .pdf-icon-box .num {
@@ -165,6 +169,7 @@
             display: flex;
             flex-direction: column;
             gap: 4px;
+            margin-bottom: 8px;
         }
 
         .ufi-line {
@@ -184,10 +189,53 @@
             color: #0f172a;
         }
 
+        /* NOWA SEKCJA: Szybki podgląd warunków przechowywania */
+        .storage-info-box {
+            background-color: var(--storage-bg);
+            border: 1px solid var(--storage-border);
+            border-radius: 6px;
+            padding: 8px 10px;
+            margin-top: 6px;
+        }
+
+        .storage-title {
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: #854d0e;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .storage-list {
+            font-size: 0.8rem;
+            color: var(--storage-text);
+            list-style-type: none;
+            padding-left: 2px;
+        }
+
+        .storage-list li {
+            margin-bottom: 2px;
+            line-height: 1.25;
+            position: relative;
+            padding-left: 12px;
+        }
+
+        .storage-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #a16207;
+            font-weight: bold;
+        }
+
         .chevron {
             color: #94a3b8;
             font-size: 1.2rem;
             margin-left: 8px;
+            align-self: center;
         }
 
         .preview-overlay {
@@ -308,10 +356,22 @@
             <div class="card-body">
                 <div class="card-vendor">Orlen</div>
                 <div class="card-name">Benzyna bezołowiowa 95, 98, EuroSuper 95, Super Plus 98, EFECTA 95, VERVA 98</div>
+                
                 <div class="ufi-badge-zone">
                     <div class="ufi-line"><span class="ufi-title">UFI:</span> 1V30-Q0VS-G00H-KEX6</div>
                     <div class="ufi-line"><span class="ufi-title">UFI:</span> YY30-70K5-T000-8SH8</div>
                 </div>
+
+                <div class="storage-info-box">
+                    <div class="storage-title">⚠️ Warunki przechowywania (Sekcja 5 & 7):</div>
+                    <ul class="storage-list">
+                        <li><strong>Ciecz skrajnie łatwopalna:</strong> Przechowywać z dala od źródeł ciepła, iskier i otwartego ognia.</li>
+                        <li><strong>Zagrożenie wybuchem:</strong> Zamknięte pojemniki w wysokiej temperaturze mogą eksplodować wskutek wzrostu ciśnienia.</li>
+                        <li><strong>Wentylacja:</strong> Pary są cięższe od powietrza i gromadzą się przy ziemi – wymagana sprawna wentylacja dolna.</li>
+                        <li><strong>Gaszenie:</strong> Woda może być nieskuteczna! Może rozprzestrzeniać pożar. Nie stosować zwartych prądów wody.</li>
+                    </ul>
+                </div>
+
             </div>
             <div class="chevron">➔</div>
         </div>
@@ -388,7 +448,7 @@
             document.body.style.overflow = "auto";
         }
 
-        // 4. Pobieranie plików z GitHuba i pakowanie do ZIP (Poprawiona nazwa repozytorium)
+        // 4. Pobieranie plików z GitHuba i pakowanie do ZIP
         async function downloadAllZip() {
             if (typeof JSZip === "undefined") {
                 alert("Trwa ładowanie modułu ZIP. Spróbuj ponownie za chwilę.");
